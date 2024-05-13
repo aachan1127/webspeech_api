@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="output"></div>
+
+
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- axiosライブラリの読み込み -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        // リクエストを送るurlを準備
+
+        const requestUrl = "http://localhost:3000/api/customers/";
+
+        axios
+            .get(requestUrl)
+            .then(function (response) {
+                // リクエスト成功時の処理（responseに結果が入っている）
+                console.log(response);
+
+                // リクエスト成功時の処理（responseに結果が入っている）
+                console.log(response.data.title);
+
+
+                const htmlArray = [];
+                // itemsが存在する場合のみforEachを実行
+                if (response.data) {
+                    response.data.forEach(function (item) {
+
+
+                        htmlArray.push('<p>' + item.title + '</p>');
+                    });
+                }
+
+                else {
+                    console.log("No items found in response.");
+                }
+
+                console.log(htmlArray);
+                $('#output').html(htmlArray);
+
+
+
+
+            })
+            .catch(function (error) {
+                // リクエスト失敗時の処理（errorにエラー内容が入っている）
+                console.log(error);
+            })
+            .finally(function () {
+                // 成功失敗に関わらず必ず実行
+                console.log("done!");
+            });
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
